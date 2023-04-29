@@ -40,6 +40,18 @@ class Node:
                 grad2 = self.children[i].get_grad()  # 结果节点对子节点的梯度
                 self.grad += grad1 * grad2
             return self.grad
+    def clear(self):
+        '''递归清除父节点的值和梯度信息'''
+        self.grad = None
+        if self.parent1 is not None:  # 清空中间隐藏节点的值
+            self.value = None
+        for parent in [self.parent1, self.parent2]:
+            if parent is not None:
+                parent.clear()
+    def update(self, lr=0.001):
+        '''根据本节点的梯度，更新本节点的值'''
+        self.value -= lr * self.grad
+
 
 
 class Varrible(Node):
