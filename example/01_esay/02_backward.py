@@ -15,9 +15,14 @@ if __name__ == '__main__':
     # 使用计算图计算
     x1.set_value(int(input("请输入x：")))
     y = add.forward()
-    print(y)
+    print(f"y: {y}")
+    # 反向传播求梯度
+    w_grad = w1.get_grad()
+    x_grad = x1.get_grad()
+    print(f"w_grad: {w_grad}, x_grad: {x_grad}")
 
     '''
-    请输入x：2
-    5
+    请输入x：3
+    y: 7
+    w_grad: 3, x_grad: 2
     '''
