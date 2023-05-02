@@ -1,16 +1,23 @@
 class Node:
-    def __init__(self, parent1=None, parent2=None) -> None:
-        self.parent1 = parent1
-        self.parent2 = parent2
+    def __init__(self, parents=[], parent1=None, parent2=None) -> None:
+        # say --> 兼容以前使用parent1、parent2参数创建结点的用法
+        if parents:
+            self.parents = [parents, parent1]
+        elif parent1:
+            self.parents = []
+            if parent1:
+                self.parents.append(parent1)
+            if parent2:
+                self.parents.append(parent2)
+        else:
+            self.parents = parents
+        
         self.value = None
-
         self.grad = None  # 在其它结点求梯度时可能再次用到本结点的梯度
         self.children = []
 
-        parents = [self.parent1, self.parent2]
-        for parent in parents:
-            if parent is not None:
-                parent.children.append(self)
+        for parent in self.parents:
+            parent.children.append(self)  # problem --> 好像有点问题
 
     def set_value(self, value):
         self.value = value
@@ -18,7 +25,7 @@ class Node:
         '''抽象方法，在具体的类中重写'''
         pass
     def forward(self):
-        for parent in [self.parent1, self.parent2]:
+        for parent in self.parents:
             if parent is not None and parent.value is None:
                 parent.forward()
         self.compute()
@@ -43,11 +50,10 @@ class Node:
     def clear(self):
         '''递归清除父节点的值和梯度信息'''
         self.grad = None
-        if self.parent1 is not None:  # 清空非变量节点的值
-            self.value = None
-        for parent in [self.parent1, self.parent2]:
-            if parent is not None:
-                parent.clear()
+        if self.parents:
+            self.value = None  # 清空非变量节点的值
+        for parent in self.parents:
+            parent.clear()
     def update(self, lr=0.001):
         '''根据本节点的梯度，更新本节点的值'''
         self.value -= lr * self.grad  # 减号表示梯度的反方向

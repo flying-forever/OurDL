@@ -1,3 +1,4 @@
+# 对象的传引用与传值
 class One:
     def __init__(self):
         self.one = 1

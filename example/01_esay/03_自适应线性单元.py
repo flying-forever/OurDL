@@ -18,7 +18,7 @@ if __name__ == '__main__':
     b.set_value(0)
     # 生成训练数据
     import random
-    data_x = [random.uniform(-10, 10) for i in range(10)]  # 按均匀分布生成[-10, 10]范围内的随机实数
+    data_x = [random.uniform(-10, 10) for i in range(20)]  # 按均匀分布生成[-10, 10]范围内的随机实数
     data_label = [2 * data_x_one + 1 for data_x_one in data_x]
     # 开始训练
     for i in range(len(data_x)):
