@@ -19,7 +19,7 @@ class Node:
         pass
     def forward(self):
         for parent in [self.parent1, self.parent2]:
-            if parent.value is None:
+            if parent is not None and parent.value is None:
                 parent.forward()
         self.compute()
         return self.value
@@ -43,14 +43,14 @@ class Node:
     def clear(self):
         '''递归清除父节点的值和梯度信息'''
         self.grad = None
-        if self.parent1 is not None:  # 清空中间隐藏节点的值
+        if self.parent1 is not None:  # 清空非变量节点的值
             self.value = None
         for parent in [self.parent1, self.parent2]:
             if parent is not None:
                 parent.clear()
     def update(self, lr=0.001):
         '''根据本节点的梯度，更新本节点的值'''
-        self.value -= lr * self.grad
+        self.value -= lr * self.grad  # 减号表示梯度的反方向
 
 
 

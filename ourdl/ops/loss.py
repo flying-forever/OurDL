@@ -5,7 +5,7 @@ class LossFunction(Node):
     pass
 
 class ValueLoss(LossFunction):
-    '''直接作差 --> 真的可以吗？'''
+    '''损失函数：作差取绝对值'''
     def compute(self):
         self.value = self.parent1.value - self.parent2.value
         self.flag = self.value > 0
