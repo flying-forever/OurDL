@@ -1,0 +1,49 @@
+Date : 2023-05-02 18:43:57
+Directory : d:\code_all\code_python\MyAI\OurDL
+Total : 15 files,  234 codes, 19 comments, 30 blanks, all 283 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| Python   |         14 |        231 |         19 |         30 |        280 |
+| Markdown |          1 |          3 |          0 |          0 |          3 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++--------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                               | files      | code       | comment    | blank      | total      |
++--------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                  |         15 |        234 |         19 |         30 |        283 |
+| . (Files)                                                          |          1 |          3 |          0 |          0 |          3 |
+| example                                                            |          8 |        123 |         16 |         14 |        153 |
+| example\00_简单测试                                                    |          1 |         21 |          2 |          1 |         24 |
+| example\01_esay                                                    |          6 |         90 |         14 |         13 |        117 |
+| example\try                                                        |          1 |         12 |          0 |          0 |         12 |
+| ourdl                                                              |          6 |        108 |          3 |         16 |        127 |
+| ourdl (Files)                                                      |          1 |          2 |          0 |          0 |          2 |
+| ourdl\core                                                         |          2 |         61 |          2 |          7 |         70 |
+| ourdl\ops                                                          |          3 |         45 |          1 |          9 |         55 |
++--------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++--------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                           | language | code       | comment    | blank      | total      |
++--------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| d:\code_all\code_python\MyAI\OurDL\ReadMe.md                       | Markdown |          3 |          0 |          0 |          3 |
+| d:\code_all\code_python\MyAI\OurDL\example\00_简单测试\阶跃函数图像.py       | Python   |         21 |          2 |          1 |         24 |
+| d:\code_all\code_python\MyAI\OurDL\example\01_esay\01_forward.py   | Python   |         18 |          3 |          3 |         24 |
+| d:\code_all\code_python\MyAI\OurDL\example\01_esay\02_backward.py  | Python   |         22 |          4 |          3 |         29 |
+| d:\code_all\code_python\MyAI\OurDL\example\01_esay\03_自适应线性单元.py   | Python   |         29 |          5 |          2 |         36 |
+| d:\code_all\code_python\MyAI\OurDL\example\01_esay\04_阶跃函数与二次拟合.py | Python   |          7 |          1 |          1 |          9 |
+| d:\code_all\code_python\MyAI\OurDL\example\01_esay\z.py            | Python   |         14 |          1 |          3 |         18 |
+| d:\code_all\code_python\MyAI\OurDL\example\01_esay\z2.py           | Python   |          0 |          0 |          1 |          1 |
+| d:\code_all\code_python\MyAI\OurDL\example\try\01_列表参数.py          | Python   |         12 |          0 |          0 |         12 |
+| d:\code_all\code_python\MyAI\OurDL\ourdl\__init__.py               | Python   |          2 |          0 |          0 |          2 |
+| d:\code_all\code_python\MyAI\OurDL\ourdl\core\__init__.py          | Python   |          4 |          0 |          1 |          5 |
+| d:\code_all\code_python\MyAI\OurDL\ourdl\core\node.py              | Python   |         57 |          2 |          6 |         65 |
+| d:\code_all\code_python\MyAI\OurDL\ourdl\ops\__init__.py           | Python   |          1 |          0 |          0 |          1 |
+| d:\code_all\code_python\MyAI\OurDL\ourdl\ops\loss.py               | Python   |         16 |          1 |          4 |         21 |
+| d:\code_all\code_python\MyAI\OurDL\ourdl\ops\ops.py                | Python   |         28 |          0 |          5 |         33 |
+| Total                                                              |          |        234 |         19 |         30 |        283 |
++--------------------------------------------------------------------+----------+------------+------------+------------+------------+

@@ -30,3 +30,15 @@ class Step(Node):
     def get_parent_grad(self, parent):  # parent: 有多个父节点时，知道是求哪个父节点的导数，但Step仅一个父节点。
         '''problem --> 阶跃函数不可导，如何理解它的求导?'''
         return 0. if self.parents[0].value > 0 else -1.
+
+
+class Relu(Node):
+    def compute(self):
+        assert len(self.parents) == 1
+        self.value = self.parents[0].value if self.parents[0].value >= 0 else 0
+    def get_parent_grad(self, parent):
+        return 1. if self.parents[0].value > 0 else 0  # 发现relu的导函数就是step
+    @staticmethod
+    def relu(x: float):
+        '''静态方法 --> 在计算图之外使用relu'''
+        return x if x >= 0. else 0.

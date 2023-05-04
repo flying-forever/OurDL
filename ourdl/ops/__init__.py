@@ -1,1 +1,1 @@
-from .ops import Add, Mul, Step
+from .ops import Add, Mul, Step, Relu
