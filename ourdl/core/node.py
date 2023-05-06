@@ -1,16 +1,22 @@
 class Node:
     def __init__(self, parents=[], parent1=None, parent2=None) -> None:
         # say --> 兼容以前使用parent1、parent2参数创建结点的用法
-        if parents:
-            self.parents = [parents, parent1]
-        elif parent1:
-            self.parents = []
-            if parent1:
-                self.parents.append(parent1)
-            if parent2:
-                self.parents.append(parent2)
-        else:
+        ''' 
+        @ 可能的参数传递情况
+        1 (parents=p1)
+        2 (parents=p1, parent1=p2)
+        3 (parents=[], parent1=p1, parent2=p2)
+        4 (parents=[p1, p2, p3, ...])
+        '''
+
+        if parents and type(parents) == list:
             self.parents = parents
+        else:
+            self.parents = []
+            temp_parents = [parents, parent1, parent2]
+            for p in temp_parents:
+                if p:
+                    self.parents.append(p)
         
         self.value = None
         self.grad = None  # 在其它结点求梯度时可能再次用到本结点的梯度
@@ -48,7 +54,7 @@ class Node:
                 self.grad += grad1 * grad2
             return self.grad
     def clear(self):
-        '''递归清除父节点的值和梯度信息'''
+        '''递归清除本节点和父节点的值和梯度信息'''
         self.grad = None
         if self.parents:
             self.value = None  # 清空非变量节点的值
