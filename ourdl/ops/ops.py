@@ -42,3 +42,17 @@ class Relu(Node):
     def relu(x: float):
         '''静态方法 --> 在计算图之外使用relu'''
         return x if x >= 0. else 0.
+
+
+class LeakyRelu(Node):
+    '''消除了relu中导数为0的情况'''
+    def compute(self):
+        assert len(self.parents) == 1
+        t = self.parents[0].value
+        self.value = t if t >= 0 else t * 0.1
+    def get_parent_grad(self, parent):
+        return 1. if self.parents[0].value > 0 else 0.1  # 发现relu的导函数就是step
+    @staticmethod
+    def relu(x: float):
+        '''静态方法 --> 在计算图之外使用leakyrelu'''
+        return x if x >= 0. else x * 0.1
