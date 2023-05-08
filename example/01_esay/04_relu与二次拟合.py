@@ -14,7 +14,7 @@
 2 将画布分成多块，展示计算图的多个阶段。
 '''
 import sys
-sys.path.append('../..')
+sys.path.append('../..')  # 父目录的父目录
 from ourdl.core import Varrible
 from ourdl.ops import Mul, Add
 from ourdl.ops.loss import ValueLoss
@@ -24,9 +24,12 @@ import numpy as np
 import random
 
 def show_ax_mul(ax):
-    '''用于绘制多图动画'''
+    '''
+    用于绘制多图动画\n
+    @ problem\n
+    1 在这里进行一次forward()应该是冗余的，因为在计算损失时已经forward()一次了'''
     # 1 画真实的二次函数曲线
-    show_x = np.linspace(0, 2, 60, endpoint=True)
+    show_x = np.linspace(-1.5, 2.5, 60, endpoint=True)
     show_y = [x_one * x_one for x_one in show_x]
     ax[2].plot(show_x, show_y)
     # 2 画模型拟合的曲线

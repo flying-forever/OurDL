@@ -1,6 +1,10 @@
 from ..core import Node
 
-class Add(Node):
+class Op(Node):
+    '''抽象运算节点类'''
+    pass
+
+class Add(Op):
     def compute(self):
         self.value = 0
         for parent in self.parents:
@@ -9,7 +13,7 @@ class Add(Node):
     def get_parent_grad(self, parent):
         return 1
 
-class Mul(Node):
+class Mul(Op):
     '''仅支持两个父节点'''
     def compute(self):
         assert len(self.parents) == 2
@@ -20,7 +24,7 @@ class Mul(Node):
         else:
             return self.parents[0].value
 
-class Step(Node):
+class Step(Op):
     def compute(self):
         '''
         @阶跃函数。单个父节点的值作为输入，产生一个标量输出
@@ -31,8 +35,7 @@ class Step(Node):
         '''problem --> 阶跃函数不可导，如何理解它的求导?'''
         return 0. if self.parents[0].value > 0 else -1.
 
-
-class Relu(Node):
+class Relu(Op):
     def compute(self):
         assert len(self.parents) == 1
         self.value = self.parents[0].value if self.parents[0].value >= 0 else 0
@@ -43,8 +46,7 @@ class Relu(Node):
         '''静态方法 --> 在计算图之外使用relu'''
         return x if x >= 0. else 0.
 
-
-class LeakyRelu(Node):
+class LeakyRelu(Op):
     '''消除了relu中导数为0的情况'''
     def compute(self):
         assert len(self.parents) == 1
