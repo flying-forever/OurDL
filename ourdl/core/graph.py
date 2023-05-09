@@ -15,23 +15,41 @@ class Graph:
         '''
         self.nodes.append(node)
     def init_params(self):
-        '''
-        初始化可训练节点，使用[-0.5, 0.5]的均匀分布'''
+        '''初始化可训练节点，使用[-0.5, 0.5]的均匀分布'''
         for node in self.nodes:  # 定义方法 --> 返回一个可训练节点的列表？
             if node.train:
                 node.set_value(random.uniform(-0.5, 0.5))
-    def backward(self):
+    def set_nodes(self, nodes_in:list, nodes_out:list, node_loss:object, node_label:object):
+        '''设置计算图中的特殊节点'''
+        self.nodes_in = nodes_in
+        self.nodes_out = nodes_out
+        self.node_loss = node_loss
+        self.node_label = node_label
+    def forward(self, x:list, label):
         '''
-        计算所有节点的梯度，并更新可训练节点的值'''
+        前向传播，到损失节点，并返回损失值 --> backward搭配使用
+        @ problem
+        1. label会是数组吗？
+        '''
+        for i, x_ in enumerate(x):
+            self.nodes_in[i].set_value(x_)
+        self.node_label.set_value(label)
+        return self.node_loss.forward()
+    def backward(self):
+        '''计算所有节点的梯度，并更新可训练节点的值'''
         for node in self.nodes:
             if node.train:
                 node.get_grad()
                 node.update()
-    def forward(self):
-        '''
-        计算图的前向计算，仅到结果节点'''
+    def clear(self):
+        '''调用损失节点的clear方法，递归清除计算图所有节点的梯度，和非变量节点（有上游节点）的值'''
+        self.node_loss.clear()
+    def predict(self, x:list):
+        '''前向计算，返回结果节点的值'''
+        self.node_loss.clear()
+        for i, x_ in enumerate(x):
+            self.nodes_in[i].set_value(x_)
         return [node.forward() for node in self.nodes_out]
 
-    
 # 全局对象
 default_graph = Graph()

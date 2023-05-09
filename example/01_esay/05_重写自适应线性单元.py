@@ -1,8 +1,5 @@
 '''
-1. 与第一次的代码量差不多，但是成功把计算图的搭建从主函数中抽离出来。
-2. 直接访问类graph的nodes等属性并不方便，因为不知道node的类型，没有代码补全。
-   这就是将对属性的操作都封装成一个方法的好处吗？
-3. 目前实现中，手动"设置计算图的特殊节点"的方式并不方便。
+1. 感觉逻辑简介清晰了很多。
 '''
 import sys
 sys.path.append('../..')
@@ -21,11 +18,8 @@ def build_graph():
     label = Varrible()
     loss = ValueLoss(label, add)
     # 2 设置计算图的特殊节点
-    default_graph.nodes_in = [x]
-    default_graph.nodes_out = [add]
-    default_graph.node_loss = loss
-    default_graph.node_label = label
-
+    default_graph.set_nodes(nodes_in=[x], nodes_out=[add], node_loss=loss, node_label=label)
+    
     return default_graph
 
 if __name__ == '__main__':
@@ -37,11 +31,15 @@ if __name__ == '__main__':
     data_label = [2 * data_x_one + 1 for data_x_one in data_x]
     # 3 训练
     for i in range(len(data_x)):
-        # 3.1 为输入和标签赋值
-        graph.nodes_in[0].set_value(data_x[i])
-        graph.node_label.set_value(data_label[i])
-        # 3.2 前向传播 + 反向传播更新参数
-        loss = graph.node_loss.forward()
+        # 前向传播 --> 计算各节点的值
+        loss = graph.forward([data_x[i]], data_label[i])
+        # 反向传播 --> 更新梯度
         graph.backward()
         print(f'loss:{loss}', ["{:.2f}".format(node.value) for node in graph.nodes])
-        graph.node_loss.clear()
+        # 清除梯度信息和运算节点的值 --> 为下次计算准备
+        graph.clear()
+    # 4 推理
+    results = []
+    for x in range(5):
+        results.append(graph.predict([x]))
+    print(f'results:{results}')
