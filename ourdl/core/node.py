@@ -69,7 +69,7 @@ class Node:
             self.value = None  # 清空非变量节点的值
         for parent in self.parents:
             parent.clear()
-    def update(self, lr=0.01):
+    def update(self, lr=0.0001):
         '''
         根据本节点的梯度，更新本节点的值'''
         self.value -= lr * self.grad  # 减号表示梯度的反方向
