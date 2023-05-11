@@ -7,3 +7,7 @@ Hello, World!
 **拟合结果**：
 
 ![image](https://user-images.githubusercontent.com/109209050/236653109-9bfaf4ae-5af5-4257-b7e1-38775ed92b10.png)
+
+**中间节点**：
+
+![figure_3](https://user-images.githubusercontent.com/109209050/237063166-88959786-8532-4642-8baf-3520d5b80450.png)
