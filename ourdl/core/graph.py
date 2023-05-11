@@ -35,12 +35,12 @@ class Graph:
             self.nodes_in[i].set_value(x_)
         self.node_label.set_value(label)
         return self.node_loss.forward()
-    def backward(self):
+    def backward(self, lr=0.0001):
         '''计算所有节点的梯度，并更新可训练节点的值'''
         for node in self.nodes:
             if node.train:
                 node.get_grad()
-                node.update()
+                node.update(lr=lr)
     def clear(self):
         '''调用损失节点的clear方法，递归清除计算图所有节点的梯度，和非变量节点（有上游节点）的值'''
         self.node_loss.clear()
